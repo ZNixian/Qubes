@@ -15,6 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mygame.cubes.LavaCube;
 import mygame.cubes.PlayerCube;
 import mygame.cubes.TargetCube;
 import mygame.cubes.TargetCubeSolved;
@@ -120,6 +121,12 @@ public abstract class Cube {
         if (cu.getClass().equals(WoodCube.class)) {
 
             cu.moveInDir(cubes, dir, main);
+        }
+        
+        if (cu.getClass().equals(LavaCube.class) && getClass().equals(PlayerCube.class)) {
+            geom.removeFromParent();
+            cubes.remove(this);
+            main.setSelected(null);
         }
         return false;
     }
