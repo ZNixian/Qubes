@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<root>
+    <block x="5" y="0" z="1" type="SteelCube" />        <!-- y=0 -->
+    
+    <block x="1" y="1" z="1" type="PlayerCube" />       <!-- y=1 -->
+    <block x="0" y="1" z="1" type="SteelCube" />
+    <block x="4" y="1" z="1" type="SteelCube" />
+    <block x="8" y="1" z="1" type="SteelCube" />
+    
+    <block x="5" y="3" z="1" type="SteelCube" />
+    <block x="6" y="3" z="1" type="SteelCube" />
+    
+    <block x="1" y="4" z="1" type="SteelCube" />
+    <block x="6" y="4" z="1" type="SteelCube" />
+    
+    <block x="3" y="5" z="1" type="SteelCube" />
+    <block x="4" y="5" z="1" type="TargetCube" />
+    
+    <block x="3" y="6" z="1" type="SteelCube" />
+    
+    <block x="7" y="7" z="1" type="SteelCube" />
+</root>
