@@ -16,6 +16,6 @@ public class LavaCube extends Cube {
 
     public LavaCube(Geometry geom) {
         super(geom);
-        geom.getMaterial().setColor("Color", new ColorRGBA(1, 0.5f, 0.5f, 0.75f));
+        geom.getMaterial().setColor("Color", new ColorRGBA(1, 0, 0, 1));
     }
 }

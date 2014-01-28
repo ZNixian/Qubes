@@ -16,6 +16,6 @@ public class WoodCube extends Cube {
 
     public WoodCube(Geometry geom) {
         super(geom);
-        geom.getMaterial().setColor("Color", ColorRGBA.Brown);
+        geom.getMaterial().setColor("Color", ColorRGBA.Brown.add(new ColorRGBA(0, 0, 0, -0.25f)));
     }
 }

@@ -16,6 +16,6 @@ public class SteelCube extends Cube {
 
     public SteelCube(Geometry geom) {
         super(geom);
-        geom.getMaterial().setColor("Color", ColorRGBA.Gray);
+        geom.getMaterial().setColor("Color", ColorRGBA.Gray.add(new ColorRGBA(0, 0, 0, -0.25f)));
     }
 }
