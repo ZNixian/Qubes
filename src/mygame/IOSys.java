@@ -34,8 +34,8 @@ public class IOSys {
 
     public void saveToFile(String fname, String data) {
         try {
-            File fi = new File(fname);
-            if(!fi.getParentFile().exists()) {
+            File fi = new File("/sdcard/" + fname);
+            if (!fi.getParentFile().exists()) {
                 fi.getParentFile().mkdirs();
             }
             BufferedWriter writer = new BufferedWriter(new FileWriter(fi));
@@ -48,7 +48,7 @@ public class IOSys {
 
     public String readLineFromFile(String fname) {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(fname));
+            BufferedReader reader = new BufferedReader(new FileReader("/sdcard/" + fname));
             String out = reader.readLine();
             reader.close();
             return out;

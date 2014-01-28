@@ -25,11 +25,13 @@ public class Input implements AnalogListener, ActionListener {
     private boolean isMouseDown;
     private final InputManager inputManager;
     private final GUI gui;
+    private final Main main;
 
-    public Input(Camera cam, InputManager inputManager, GUI gui) {
+    public Input(Camera cam, InputManager inputManager, GUI gui, Main main) {
         this.cam = cam;
         this.gui = gui;
         this.inputManager = inputManager;
+        this.main = main;
 
         String[] mappings = new String[]{
             "FLYCAM_Left",
@@ -65,16 +67,20 @@ public class Input implements AnalogListener, ActionListener {
         vtilt = Math.max(vtilt, -((float) Math.PI / 2 - 0.05f));
 
         zoom = Math.min(zoom, 50);
-        zoom = Math.max(zoom, 1);
+        zoom = Math.max(zoom, 0.5f);
 
         float vtilts = (float) Math.cos(vtilt);
         Vector3f pos = new Vector3f((float) Math.cos(htilt) * vtilts * zoom,
                 (float) Math.sin(vtilt) * zoom,
                 (float) Math.sin(htilt) * vtilts * zoom);
         pos.multLocal(10);
-        cam.setLocation(pos);
-        cam.lookAt(Vector3f.ZERO, Vector3f.UNIT_Y);
-        
+        Vector3f lookPos = Vector3f.ZERO;
+        if (main.getSelected() != null) {
+            lookPos = main.getSelected().getPos();
+        }
+        cam.setLocation(pos.add(lookPos));
+        cam.lookAt(lookPos, Vector3f.UNIT_Y);
+
         gui.handleHover(inputManager.getCursorPosition());
     }
 
@@ -82,6 +88,7 @@ public class Input implements AnalogListener, ActionListener {
         if (name.equals("Mouse")) {
             if (!mousePressed || !gui.handleClick(inputManager.getCursorPosition())) {
                 isMouseDown = mousePressed;
+                main.actionListener.onAction(name, isMouseDown, 0);
             }
         }
     }

@@ -6,8 +6,10 @@ package mygame;
 
 import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
+import com.jme3.material.RenderState.BlendMode;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
+import com.jme3.renderer.queue.RenderQueue.Bucket;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.shape.Box;
@@ -57,8 +59,11 @@ public abstract class Cube {
         Geometry cube = new Geometry("Cube", box);
         cube.setLocalTranslation(vec);
         Material mat1 = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+//        mat1.setTexture("ColorMap", assetManager.loadTexture("Textures/outline.png"));
         mat1.setColor("Color", ColorRGBA.Blue);
+        mat1.getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
         cube.setMaterial(mat1);
+        cube.setQueueBucket(Bucket.Transparent);
         if (target.getAnnotation(Selectible.class) == null) {
             rootnode.attachChild(cube);
         } else {

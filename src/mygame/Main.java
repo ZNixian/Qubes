@@ -64,7 +64,7 @@ public class Main extends SimpleApplication {
 //        cubes.add(Cube.makeCube("a Dragon", -2f, 0f, 1f, assetManager, shootables, PlayerCube.class));
 //        cubes.add(Cube.makeCube("a Dragon", -2f, 3f, 1f, assetManager, shootables, PlayerCube.class));
         flyCam.setEnabled(false);
-        in = new Input(cam, inputManager, new GUI(guiNode, assetManager, settings, this));
+        in = new Input(cam, inputManager, new GUI(guiNode, assetManager, settings, this), this);
 
         assetManager.registerLoader(LevelLoader.class, "level");
 
@@ -101,18 +101,18 @@ public class Main extends SimpleApplication {
      * Declaring the "Shoot" action and mapping to its triggers.
      */
     private void initKeys() {
-        inputManager.addMapping("Shoot", new MouseButtonTrigger(MouseInput.BUTTON_RIGHT)); // trigger 2: left-button click
+        inputManager.addMapping("Shoot", new MouseButtonTrigger(MouseInput.BUTTON_RIGHT));
         inputManager.addListener(actionListener, "Shoot");
     }
     /**
      * Defining the "Shoot" action: Determine what was hit and how to respond.
      */
-    private ActionListener actionListener = new ActionListener() {
+    public ActionListener actionListener = new ActionListener() {
         public void onAction(String name, boolean keyPressed, float tpf) {
             if (isInMenuState) {
                 return;
             }
-            if (name.equals("Shoot") && !keyPressed) {
+            if ((name.equals("Shoot") || name.equals("Mouse")) && !keyPressed) {
                 // 1. Reset results list.
                 CollisionResults results = new CollisionResults();
                 Vector2f click2d = inputManager.getCursorPosition();
@@ -133,7 +133,8 @@ public class Main extends SimpleApplication {
 //          System.out.println("  You shot " + hit + " at " + pt + ", " + dist + " wu away.");
 //        }
                 // 5. Use the results (we mark the hit object)
-                if (getSelected() != null) {
+
+                if (getSelected() != null && (name.equals("Shoot") || results.size() > 0)) {
                     getSelected().getGeom().getMaterial().setColor("Color", ColorRGBA.Blue);//.setLocalScale(1);
                     deselect();
                 }

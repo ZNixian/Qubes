@@ -25,7 +25,7 @@ import org.w3c.dom.NodeList;
  */
 public class LevelLoader implements AssetLoader {
 
-    public static String[] levels = {"lv1", "lv2"};
+    public static String[] levels = {"lv1", "lv2", "lv3"};
 
     public Object load(AssetInfo assetInfo) {
         Document doc = createDocFromStream(assetInfo.openStream());
